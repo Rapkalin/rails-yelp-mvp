@@ -1,0 +1,24 @@
+<h1><%= @restaurant.name %></h1>
+
+<ul>
+    <li>Address: <%= @restaurant.address %></li>
+    <li>Phone number: <%= @restaurant.phone_number %></li>
+    <li>Category: <%= @restaurant.category %></li>
+</ul>
+
+<ul class="list-group">
+  <% @restaurant.reviews.each do |review| %>
+    <li class="list-group-item"><%= review.content %></li>
+  <% end %>
+</ul>
+
+<ul class="list-group">
+    <% ratings = [] %>
+    <% @restaurant.reviews.each do |review| %>
+        <% ratings << review.rating %>
+    <% end %>
+    <p>Ratings: <%= (ratings.sum(0.0)/ratings.length).round(1) %></p>
+</ul>
+
+<%= link_to "Back to all restaurants", restaurants_path %>
+<%= link_to "Leave a review", new_restaurant_review_path(@restaurant) %>
